@@ -40,7 +40,7 @@ public abstract class PersonajeFisico extends Personaje {
      */
     public int calcularDanioFisico() {
 
-        int danio = getPoderBase() + atributoFisico;
+        int danio = getPoderBase();
 
         Armas arma = getArmaEquipada();
 
