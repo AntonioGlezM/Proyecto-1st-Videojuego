@@ -1,0 +1,44 @@
+# ========================
+# Archivos compilados Java
+# ========================
+bin/
+*.class
+
+# ========================
+# VS Code (mantenemos settings del proyecto)
+# ========================
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# ========================
+# IDEs (IntelliJ, Eclipse, NetBeans)
+# ========================
+.idea/
+*.iml
+*.ipr
+*.iws
+.classpath
+.project
+.settings/
+nbproject/
+nbbuild/
+nbdist/
+nb-deployment/
+target/
+
+# ========================
+# Sistema operativo
+# ========================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ========================
+# Logs y temporales
+# ========================
+*.log
+*.tmp
+*.bak
+*.swp
+*~
