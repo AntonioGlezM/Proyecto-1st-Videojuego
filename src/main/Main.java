@@ -1,5 +1,14 @@
+package main;
+
+import view.View;
+
 public class Main {
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
+
+        // Crear la vista
+        View vista = new View();
+
+        // Mostrar el menú principal
+        vista.mostrarMenu();
     }
 }
