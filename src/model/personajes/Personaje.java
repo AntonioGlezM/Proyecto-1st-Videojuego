@@ -5,12 +5,12 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-import com.personajesvideojuegos.modelo.Acciones.Ataque;
+import model.acciones.Ataque;
 import model.armas.Armas;
 import model.consumibles.Consumibles;
-import com.personajesvideojuegos.modelo.Consumibles.PocionCuracion;
-import com.personajesvideojuegos.modelo.Consumibles.PocionFuerza;
-import com.personajesvideojuegos.modelo.Consumibles.PocionMana;
+import model.consumibles.PocionCuracion;
+import model.consumibles.PocionFuerza;
+import model.consumibles.PocionMana;
 import model.habilidades.Habilidad;
 
 /**

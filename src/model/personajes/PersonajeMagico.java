@@ -2,6 +2,7 @@ package model.personajes;
 
 import model.armas.Armas;
 import model.interfaces.Magico;
+import model.acciones.Ataque;
 
 /**
  * Clase abstracta intermedia para personajes mágicos.
