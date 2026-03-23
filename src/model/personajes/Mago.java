@@ -2,7 +2,7 @@ package model.personajes;
 
 import model.acciones.Ataque;
 import model.habilidades.Habilidad;
-import model.personajes.*;
+import model.interfaces.HabilidadEspecial;
 
 /**
  * Clase Mago.
@@ -12,8 +12,12 @@ import model.personajes.*;
  *
  * Cuando no tiene maná suficiente, recurre al golpe básico
  * que no tiene coste.
+ *
+ * Habilidad especial: Distorsión Temporal.
+ * Permite al Mago atacar dos veces en su siguiente turno.
+ * El estado es gestionado por el controlador.
  */
-public class Mago extends PersonajeMagico {
+public class Mago extends PersonajeMagico implements HabilidadEspecial {
 
     /**
      * Constructor del Mago.
@@ -67,5 +71,39 @@ public class Mago extends PersonajeMagico {
     @Override
     public Ataque atacar(Personaje objetivo) {
         return new Ataque(calcularDanioMagico());
+    }
+
+    // ==============================
+    // HABILIDAD ESPECIAL: DISTORSIÓN TEMPORAL
+    // ==============================
+
+    /**
+     * Devuelve el nombre de la habilidad especial del Mago.
+     * La Vista lo usará para mostrar la opción 2 del menú de forma dinámica.
+     */
+    @Override
+    public String getNombreHabilidadEspecial() {
+        return "Distorsión Temporal";
+    }
+
+    /**
+     * Ejecuta la habilidad especial del Mago.
+     *
+     * Activa el estado de doble ataque: en el siguiente turno
+     * el Mago podrá elegir y ejecutar dos habilidades en lugar de una.
+     *
+     * IMPORTANTE: este método no gestiona el estado por sí solo.
+     * Es el controlador quien detecta que la habilidad especial
+     * es "Distorsión Temporal" y activa el flag correspondiente (dobleAtaque).
+     *
+     * @param personaje El Mago que activa la distorsión (no se usa directamente
+     *                  aquí).
+     */
+    @Override
+    public void usarHabilidadEspecial(Personaje personaje) {
+        // El estado de doble ataque lo gestiona el controlador mediante el flag
+        // dobleAtaque.
+        // Este método existe para cumplir el contrato de la interfaz HabilidadEspecial
+        // y para que la Vista pueda mostrar el nombre correcto en el menú.
     }
 }

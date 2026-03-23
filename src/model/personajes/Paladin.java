@@ -1,10 +1,10 @@
 package model.personajes;
 
-import model.personajes.*;
 import model.acciones.Ataque;
 import model.acciones.Defensa;
 import model.habilidades.Habilidad;
 import model.interfaces.Defensor;
+import model.interfaces.HabilidadEspecial;
 
 /**
  * Clase Paladin.
@@ -17,8 +17,14 @@ import model.interfaces.Defensor;
  *
  * El golpe básico no consume maná, garantizando
  * que siempre puede actuar aunque se quede sin recursos.
+ *
+ * Habilidad especial: Furia Divina.
+ * El Paladín carga un ataque devastador durante 2 turnos
+ * (el turno que lo activa y el siguiente) y al descargar
+ * hace el triple del daño normal.
+ * El estado es gestionado por el controlador.
  */
-public class Paladin extends PersonajeMagico implements Defensor {
+public class Paladin extends PersonajeMagico implements Defensor, HabilidadEspecial {
 
     /**
      * Constructor del Paladín.
@@ -87,5 +93,43 @@ public class Paladin extends PersonajeMagico implements Defensor {
     @Override
     public Defensa defender() {
         return new Defensa();
+    }
+
+    // ==============================
+    // HABILIDAD ESPECIAL: FURIA DIVINA
+    // ==============================
+
+    /**
+     * Devuelve el nombre de la habilidad especial del Paladín.
+     * La Vista lo usará para mostrar la opción 2 del menú de forma dinámica.
+     */
+    @Override
+    public String getNombreHabilidadEspecial() {
+        return "Furia Divina";
+    }
+
+    /**
+     * Ejecuta la habilidad especial del Paladín.
+     *
+     * Inicia la carga de Furia Divina: el Paladín dedica este turno
+     * y el siguiente a cargar energía divina. Al completar la carga,
+     * el siguiente ataque que realice hará el triple del daño normal.
+     *
+     * Durante la carga el Paladín no puede realizar otras acciones
+     * (el controlador bloquea el menú y pasa el turno automáticamente).
+     *
+     * IMPORTANTE: este método no gestiona el estado por sí solo.
+     * Es el controlador quien lleva la cuenta de los turnos de carga
+     * mediante los flags furiaDivinaActiva y turnosCargaFuria.
+     *
+     * @param personaje El Paladín que inicia la carga (no se usa directamente
+     *                  aquí).
+     */
+    @Override
+    public void usarHabilidadEspecial(Personaje personaje) {
+        // El estado de carga lo gestiona el controlador mediante
+        // los flags furiaDivinaActiva y turnosCargaFuria.
+        // Este método existe para cumplir el contrato de la interfaz HabilidadEspecial
+        // y para que la Vista pueda mostrar el nombre correcto en el menú.
     }
 }

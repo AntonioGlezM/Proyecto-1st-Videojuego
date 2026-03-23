@@ -1,8 +1,8 @@
 package model.personajes;
 
 import model.acciones.Ataque;
-import model.personajes.Personaje;
 import model.habilidades.Habilidad;
+import model.interfaces.HabilidadEspecial;
 
 /**
  * Clase Clerigo.
@@ -13,8 +13,13 @@ import model.habilidades.Habilidad;
  *
  * El golpe básico no consume maná, garantizando
  * que siempre puede actuar aunque se quede sin recursos.
+ *
+ * Habilidad especial: Himno Divino.
+ * El siguiente ataque del Clérigo deja una quemadura sagrada
+ * que aplica el 20% del daño causado durante 2 turnos seguidos.
+ * El estado es gestionado por el controlador.
  */
-public class Clerigo extends PersonajeMagico {
+public class Clerigo extends PersonajeMagico implements HabilidadEspecial {
 
     /**
      * Constructor del Clérigo.
@@ -59,7 +64,6 @@ public class Clerigo extends PersonajeMagico {
                 "Ira Celestial",
                 70,
                 40));
-
     }
 
     /**
@@ -69,5 +73,39 @@ public class Clerigo extends PersonajeMagico {
     @Override
     public Ataque atacar(Personaje objetivo) {
         return new Ataque(calcularDanioMagico());
+    }
+
+    // ==============================
+    // HABILIDAD ESPECIAL: HIMNO DIVINO
+    // ==============================
+
+    /**
+     * Devuelve el nombre de la habilidad especial del Clérigo.
+     * La Vista lo usará para mostrar la opción 2 del menú de forma dinámica.
+     */
+    @Override
+    public String getNombreHabilidadEspecial() {
+        return "Himno Divino";
+    }
+
+    /**
+     * Ejecuta la habilidad especial del Clérigo.
+     *
+     * Activa el estado de quemadura sagrada: el siguiente ataque
+     * del Clérigo dejará una quemadura que aplica el 20% del daño
+     * causado en ese ataque durante los 2 turnos siguientes del defensor.
+     *
+     * IMPORTANTE: este método no gestiona el estado por sí solo.
+     * Es el controlador quien detecta que la habilidad especial
+     * es "Himno Divino" y activa el flag correspondiente (himnoDivino).
+     *
+     * @param personaje El Clérigo que activa el himno (no se usa directamente aquí).
+     */
+    @Override
+    public void usarHabilidadEspecial(Personaje personaje) {
+        // El estado de quemadura sagrada lo gestiona el controlador mediante
+        // los flags himnoDivinoActivo, danioQuemadura y turnosQuemadura.
+        // Este método existe para cumplir el contrato de la interfaz HabilidadEspecial
+        // y para que la Vista pueda mostrar el nombre correcto en el menú.
     }
 }
